@@ -1,0 +1,56 @@
+﻿@{
+
+    ViewBag.Title = "Inquiry";
+}
+
+<h2>員工清單</h2>
+<div>
+    <button id="btnCreateEmp" class="btn-primary" onclick="location.href='@Url.Action("Edit","Emp")'">新增員工</button>
+</div>
+<table id="empList" class="table">
+    <thead>
+        <tr>
+            <th>部門名稱</th>
+            <th>員工姓名</th>
+            <th>員工生日</th>
+            <th>員工分機</th>
+            <th>部門職責</th>
+            <th>動作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in this.Model)
+        {
+            <tr>
+                <td>@item.DepName</td>
+                <td>@item.EmpName</td>
+                <td>@item.Birthday.ToString("yyyy/MM/dd")</td>
+                <td>@item.Ext</td>
+                <td>@item.Desccription</td>
+                <td>
+                    <button id="btnEditEmp" class="btn-primary" onclick="location.href='@Url.Action("Edit","Emp", new { id = item.ID})'">編輯</button>
+                    @*<button id="btnDelEmp" class="btn-danger" onclick="location.href='@Url.Action("Delete","Emp", new { id = item.ID})'">刪除</button>*@
+                    <button id="btnDelEmp" class="btn-danger" onclick="Delete(@item.ID)">刪除</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    })
+
+    function Delete(id) {
+        console.log('id:',id);
+        if (confirm('你確定要刪除嗎 ?')) {
+            console.log('dddddd');
+            $.post('@Url.Action("Delete","Emp" )', { id: id },
+                function (data, textStatus) {
+                    console.log('data:', data);
+                }, "text");
+        }
+    }
+
+</script>

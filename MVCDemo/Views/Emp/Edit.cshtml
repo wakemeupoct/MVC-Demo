@@ -1,0 +1,48 @@
+﻿@model MVCDemo.ViewModels.vmEmployee
+@{
+    ViewBag.Title = "新增員工";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+<form method="post" action="Edit">
+    <div class="form-group">
+        <label for="EmpId">員工編號</label>
+        <input type="text" class="form-control" id="EmpId" name="EmpId" placeholder="請輸入員工編號" value="@Model.employee.EmpId">
+    </div>
+    <div class="form-group">
+        <label for="EmpName">員工姓名</label>
+        <input type="text" class="form-control" id="EmpName" name="EmpName" placeholder="請輸入員工姓名" value="@Model.employee.EmpName">
+    </div>
+    <div class="form-group">
+        <label for="Ext">分機</label>
+        <input type="text" class="form-control" id="Ext" name="Ext" placeholder="請輸入分機號碼" value="@Model.employee.Ext">
+    </div>
+    <div class="form-group">
+        <label for="Birthday">生日</label>
+        <input type="text" class="form-control" id="Birthday" name="Birthday" placeholder="請輸入員工生日，例1990/01/03" value="@Model.employee.Birthday">
+    </div>
+    <div class="form-group">
+        <label for="DepId">部門</label>
+        @Html.DropDownList("DepartList", (IEnumerable<SelectListItem>)Model.depSelectLists, new { @class = "form-control" })
+        <input type="hidden" value="@Model.employee.DepId" id="DepId" name="DepId" />
+        <input type="hidden" value="@Model.employee.ID" id="ID" name="ID" />
+    </div>
+    <button type="submit" class="btn btn-primary">確定</button>
+</form>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#DepartList').change(function () {
+            let depId = $('#DepartList').val();
+            $('#DepId').val(depId);
+            console.log(depId);
+        });
+
+        var hidDepId = $(`#DepId`).val();
+        if (hidDepId) {
+            $('#DepartList').val(hidDepId);
+        }
+    })
+</script>
