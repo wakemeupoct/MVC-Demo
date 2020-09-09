@@ -1,9 +1,9 @@
 # MVC-Demo
 Practice CRUD use ASP.NET MVC
 
-# First Step
+#2 First Step
 Create Database with DB Demo(on this Repo)
 
-# Second Step 
+#2 Second Step 
 Adjust config for your pc
 
